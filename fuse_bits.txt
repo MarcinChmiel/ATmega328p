@@ -1,0 +1,32 @@
+How to set fuse bits using AVRDUDE
+
+We can find necessary informations about AVR fuse bits in datasheet.
+
+We have to run AVRDUDE with parameters:
+
+-p name_of_microprocessor
+
+-c name_of_programmer
+
+-U name_of_memory_part:type_of_operation:-:type_of_record
+
+
+Name of memory part:
+Fuse Low Byte	-	lfuse
+Fuse High Byte	-	hfuse
+
+Type of operation:
+r		-	read
+w		-	write
+
+-		-	send result to stdout
+
+Type of record:
+h		-	hexadecimal
+b		-	binary
+
+Examples:
+
+-p atmega328p -c usbasp -U lfuse:r:-:b		//Read Fuse Low Byte in binary code
+-p atmega328p -c usbasp -U lfuse:r:-:h		//Read Fuse Low Byte in hexadecimal code
+-p atmega328p -c usbasp -U lfuse:w:0xFF:m	//Write hexadecimal value 0xFF in Fuse Low Byte
